@@ -1,0 +1,22 @@
+{
+  "name": "ironfeast-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "build:ts": "tsc --outDir public --rootDir src/ts",
+    "start:netlify": "npx netlify-cli dev --dir=dist --functions=netlify/functions"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^3.1.1",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "astro": "^3.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.0",
+    "typescript": "^5.0.0"
+  }
+}

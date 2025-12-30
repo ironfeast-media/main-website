@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const modules = Object.entries(import.meta.glob('../../content/blog/*/*.md', { eager: true }));
+const posts = modules.map(([path, mod]) => {
+  const slug = path.split('/').pop().replace('.md', '');
+  const category = path.split('/').slice(-2, -1)[0];
+  return { slug, category, ...(mod.frontmatter ?? {}), Content: mod.default };
+}).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+const journalPosts = posts.filter((post) => post.type === 'technical-journal');
+---
+
+<BaseLayout title="Blog · Ironfeast">
+  <h2>Technical Journal</h2>
+
+  <div class="blog-list">
+    {journalPosts.map((post) => (
+      <section class="section">
+        <h3>{post.date} <a href={`/blog/${post.slug}`}>{post.title}, ${post.category}</a></h3>
+        {post.excerpt && <p>{post.excerpt}</p>}
+      </section>
+    ))}
+  </div>
+</BaseLayout>

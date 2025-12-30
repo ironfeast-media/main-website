@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+
+const page = Number(Astro.params.page || 1);
+const pageSize = 5;
+
+const modules = Object.entries(import.meta.glob('../../content/blog/*.md', { eager: true }));
+const posts = modules.map(([path, mod]) => {
+  const slug = path.split('/').pop().replace('.md', '');
+  return { slug, ...(mod.frontmatter ?? {}), Content: mod.default };
+}).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+const total = posts.length;
+const totalPages = Math.max(1, Math.ceil(total / pageSize));
+const start = (page - 1) * pageSize;
+const pagePosts = posts.slice(start, start + pageSize);
+---
+
+<BaseLayout title={`Blog · Page ${page}`}>
+  <h2>Technical Journal — Page {page}</h2>
+
+  <section class="section">
+    <ul>
+      {pagePosts.map(post => (
+        <li>
+          <a href={`/blog/${post.slug}/`}>{post.title}</a> — <small>{post.date}</small>
+          <p class="sub">{post.summary}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <nav class="pagination-nav">
+    {page > 1 ? <a href={`/blog/page/${page - 1}/`}>← Prev</a> : <span class="disabled">← Prev</span>}
+    {Array.from({ length: totalPages }).map((_, i) => {
+      const p = i + 1;
+      return p === page ? <span class="current">{p}</span> : <a href={`/blog/page/${p}/`}>{p}</a>
+    })}
+    {page < totalPages ? <a href={`/blog/page/${page + 1}/`}>Next →</a> : <span class="disabled">Next →</span>}
+  </nav>
+</BaseLayout>

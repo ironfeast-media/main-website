@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro'
+
+const tag = Astro.params.tag;
+const modules = Object.entries(import.meta.glob('../../../content/blog/*.md', { eager: true }));
+const posts = modules.map(([path, mod]) => {
+  const slug = path.split('/').pop().replace('.md', '');
+  return { slug, ...(mod.frontmatter ?? {}), Content: mod.default };
+}).filter(p => Array.isArray(p.tags) ? p.tags.includes(tag) : false).sort((a,b)=> new Date(b.date) - new Date(a.date));
+---
+
+<BaseLayout title={`Posts tagged ${tag}`}>
+  <h2>Posts tagged «{tag}»</h2>
+  {posts.length === 0 ? (
+    <p>No posts found for this tag.</p>
+  ) : (
+    <ul>
+      {posts.map(p => (
+        <li><a href={`/blog/${p.slug}/`}>{p.title}</a> — <small>{p.date}</small></li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

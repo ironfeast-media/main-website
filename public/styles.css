@@ -1,0 +1,649 @@
+:root {
+  /* Logo-driven palette */
+  --accent: #c07a3f; /* warm bronze/orange */
+  --accent-strong: #ffb36a; /* brighter highlight */
+  --copper: #7f5131; /* darker copper/gear */
+  --bronze-deep: #5e3b23; /* shadowed bronze */
+  --bg: #080b0d; /* near-black background */
+  --panel: #0e1214; /* panels */
+  --muted: #e6e4df; /* warm silver text */
+  --text: #f6f5f4; /* primary text */
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  background: var(--bg);
+  color: #fff;
+  line-height: 1.35;
+}
+.hero {
+  display: flex;
+  min-height: 60vh;
+}
+.hero-left,
+.hero-right {
+  flex: 1;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-left {
+  background: linear-gradient(135deg, #0f1518, #081017);
+  background-image: url("/industrial-vibe-factory.png"),
+    linear-gradient(135deg, #0f1518, #081017);
+  background-size: cover;
+}
+.hero-right {
+  background: linear-gradient(225deg, #07121a, #0b0f12);
+  background-image: url("/industrial-vibe-datacenter.png"),
+    linear-gradient(135deg, #0f1518, #081017);
+  background-size: cover;
+}
+/* Improve text contrast on hero panels by adding a subtle dark overlay
+   and lifting text above the overlay with shadows. This keeps images
+   visible but ensures readable copy. */
+.hero-left,
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-left::before,
+.hero-right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.52));
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-left > *,
+.hero-right > * {
+  position: relative;
+  z-index: 1;
+}
+.hero-left h1,
+.hero-right h1,
+.hero h1 {
+  color: var(--text);
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+.hero-left .sub,
+.hero-right .sub,
+.hero .sub {
+  color: rgba(246, 245, 244, 0.92);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+h1 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+.sub {
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+.cta {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--accent-strong), var(--accent));
+  color: #0b0b0b;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(192, 122, 63, 0.12);
+}
+.brand {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  color: var(--muted);
+  text-align: center;
+}
+/* About section styling to match site theme */
+.about {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.25rem 1.25rem;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 18, 20, 0.8),
+    rgba(6, 6, 6, 0.85)
+  );
+  border: 1px solid rgba(127, 81, 49, 0.06);
+  border-left: 6px solid var(--accent);
+  border-radius: 10px;
+  color: var(--muted);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+.about h2 {
+  color: var(--accent-strong);
+  margin: 0 0 0.6rem 0;
+  font-size: 1.35rem;
+}
+.about-body p {
+  margin-bottom: 0.85rem;
+  color: rgba(246, 245, 244, 0.86);
+  line-height: 1.6;
+}
+.about .about-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Gaming subsection styling */
+.gaming-section {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Each game gets its own left accent bar and card-like container */
+.gaming-section .game {
+  display: block;
+  padding: 0.9rem 1rem;
+  padding-left: 1rem;
+  border-left: 6px solid var(--accent);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.02)
+  );
+  border-radius: 8px;
+  color: rgba(246, 245, 244, 0.92);
+}
+.gaming-section .game h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--accent-strong);
+  font-size: 1.1rem;
+}
+.gaming-section .game .desc {
+  color: rgba(246, 245, 244, 0.82);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+.gaming-section .game .meta {
+  font-size: 0.9rem;
+  color: rgba(246, 245, 244, 0.66);
+}
+.cta-links a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+/* Replace default bullets with a cog icon and increase left spacing
+   so list items don't sit on top of the left accent bar. Using the
+   Unicode gear (⚙) keeps this simple and dependency-free. */
+.gaming-section .game ul {
+  list-style: none;
+  margin: 0 0 0.6rem 0;
+  padding-left: 0;
+}
+.gaming-section .game ul li {
+  position: relative;
+  padding-left: 1.9rem; /* space for the cog */
+  margin-bottom: 0.5rem;
+}
+.gaming-section .game ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.08rem;
+  width: 1rem;
+  height: 1rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  color: #c07a3f;
+  /* Inline SVG cog (from provided `cog.svg`) using currentColor so it inherits CSS color */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'><path fill='orange' d='M469.00,153.57 C469.00,153.57 497.00,153.00 497.00,153.00 497.00,153.00 547.00,153.00 547.00,153.00 549.97,153.00 553.20,152.85 555.98,154.01 563.32,157.06 564.64,168.03 566.58,175.00 566.58,175.00 577.58,216.00 577.58,216.00 578.99,220.95 580.77,230.32 584.22,233.78 588.15,237.71 602.12,240.62 608.00,242.81 608.00,242.81 638.00,255.26 638.00,255.26 638.00,255.26 657.00,265.35 657.00,265.35 664.96,268.78 673.28,261.61 680.00,257.86 680.00,257.86 716.00,237.58 716.00,237.58 720.75,234.85 728.76,229.48 734.00,229.12 741.62,228.60 746.08,234.09 751.00,239.00 751.00,239.00 779.09,268.00 779.09,268.00 785.49,274.87 801.88,287.15 800.63,297.00 799.97,302.21 793.30,312.27 790.32,317.00 790.32,317.00 769.80,350.00 769.80,350.00 767.62,353.59 761.60,362.53 760.66,366.00 759.24,371.28 765.74,380.99 768.25,386.00 773.90,397.30 778.82,409.05 782.92,421.00 782.92,421.00 788.44,437.96 788.44,437.96 791.94,444.22 802.50,445.17 809.00,446.88 809.00,446.88 850.00,458.00 850.00,458.00 854.92,459.41 864.06,461.08 867.58,464.56 871.19,468.10 870.99,473.34 871.00,478.00 871.00,478.00 871.00,546.00 871.00,546.00 870.99,550.75 871.28,555.06 867.72,558.78 864.06,562.61 853.33,564.98 848.00,566.37 848.00,566.37 808.00,577.13 808.00,577.13 800.77,578.94 791.58,579.58 787.92,587.02 787.92,587.02 781.33,607.00 781.33,607.00 778.36,615.85 773.41,627.65 769.25,636.00 766.95,640.60 759.86,652.35 760.74,657.00 761.44,660.70 767.93,670.32 770.19,674.00 770.19,674.00 791.80,709.00 791.80,709.00 795.24,714.74 802.05,724.13 800.43,731.00 799.09,736.67 793.02,741.98 789.00,746.00 789.00,746.00 764.00,771.00 764.00,771.00 764.00,771.00 752.17,783.00 752.17,783.00 747.28,788.40 742.29,795.48 734.00,794.66 728.37,794.10 721.02,789.13 716.00,786.28 716.00,786.28 679.00,765.23 679.00,765.23 675.48,763.32 666.28,757.55 663.00,756.98 658.36,756.17 648.54,762.49 644.00,764.75 627.74,772.89 617.43,777.65 600.00,783.33 592.73,785.70 584.56,786.07 581.40,794.00 581.40,794.00 566.63,848.00 566.63,848.00 564.82,855.04 563.38,866.91 555.98,869.99 553.20,871.15 549.97,871.00 547.00,871.00 547.00,871.00 475.00,871.00 475.00,871.00 460.51,870.80 460.52,860.42 457.63,849.00 457.63,849.00 447.15,811.00 447.15,811.00 445.92,806.45 443.64,795.49 441.28,792.04 437.37,786.35 423.69,783.23 417.00,781.00 405.34,777.11 393.98,772.28 383.00,766.75 383.00,766.75 368.00,758.76 368.00,758.76 359.49,754.71 355.62,759.12 348.00,763.30 348.00,763.30 306.00,787.28 306.00,787.28 297.95,791.85 290.01,798.11 281.00,792.15 274.93,788.13 267.97,779.43 262.91,774.00 262.91,774.00 234.00,745.00 234.00,745.00 227.83,738.83 221.02,733.69 223.79,724.00 225.37,718.45 231.38,710.13 234.58,705.00 234.58,705.00 254.42,673.00 254.42,673.00 258.61,666.29 265.74,659.20 262.20,651.00 262.20,651.00 253.26,633.00 253.26,633.00 253.26,633.00 241.69,605.00 241.69,605.00 239.73,599.38 237.16,586.20 232.78,582.70 229.67,580.22 219.31,578.25 215.00,577.12 215.00,577.12 175.00,566.15 175.00,566.15 167.78,564.20 156.92,562.83 153.89,555.00 152.87,552.36 153.00,548.81 153.00,546.00 153.00,546.00 153.00,478.00 153.00,478.00 153.01,473.27 152.81,468.17 156.42,464.53 160.09,460.82 168.84,459.48 174.00,458.00 174.00,458.00 216.00,446.71 216.00,446.71 223.77,444.50 232.39,444.32 236.20,436.00 236.20,436.00 242.00,418.00 242.00,418.00 242.00,418.00 255.25,386.00 255.25,386.00 257.85,380.79 264.45,371.67 263.06,366.00 262.24,362.65 256.13,353.54 254.00,350.00 254.00,350.00 232.58,315.00 232.58,315.00 229.65,310.28 224.05,302.37 223.37,297.00 222.44,289.72 229.50,282.93 234.09,278.00 234.09,278.00 267.00,245.00 267.00,245.00 271.00,241.00 279.16,231.96 284.00,230.01 291.04,227.17 298.09,231.78 304.00,235.15 304.00,235.15 345.00,258.42 345.00,258.42 350.82,261.75 359.24,268.18 366.00,265.64 366.00,265.64 388.00,254.26 388.00,254.26 388.00,254.26 419.00,241.81 419.00,241.81 425.62,239.35 437.22,237.86 441.28,231.96 443.63,228.52 445.92,217.54 447.15,213.00 447.15,213.00 457.58,175.00 457.58,175.00 459.97,166.37 459.70,157.25 469.00,153.57 Z M 495.00,298.14 C 473.42,301.39 461.45,302.06 440.00,309.69 389.17,327.78 344.01,366.28 320.26,415.00 275.18,507.47 298.73,620.08 382.00,682.63 400.88,696.81 420.62,707.21 443.00,714.67 459.84,720.28 485.31,725.79 503.00,726.00 541.08,726.44 571.26,720.66 606.00,704.69 628.63,694.29 648.51,678.50 666.00,661.00 683.87,643.13 695.18,625.50 706.24,603.00 716.56,582.03 725.96,547.37 726.00,524.00 726.00,524.00 726.00,499.00 726.00,499.00 726.00,499.00 724.13,481.00 724.13,481.00 718.15,437.94 698.57,396.83 668.91,365.00 641.73,335.83 601.94,312.58 563.00,303.65 539.26,298.21 524.03,297.72 500.00,298.14 500.00,298.14 495.00,298.14 495.00,298.14 Z M 504.00,420.21 C 504.00,420.21 513.00,420.21 513.00,420.21 524.09,420.13 537.70,423.11 548.00,427.20 595.45,446.06 617.07,504.00 596.10,550.00 588.84,565.93 576.49,579.41 562.00,589.00 551.09,596.21 537.98,600.96 525.00,602.71 525.00,602.71 512.00,603.97 512.00,603.97 489.02,603.97 462.32,593.28 446.28,576.83 411.05,540.68 410.87,480.04 448.00,445.09 464.67,429.40 481.98,423.75 504.00,420.21 Z'/></svg>");
+}
+
+@media (max-width: 800px) {
+  .about {
+    padding: 1rem;
+    border-left-width: 4px;
+  }
+}
+/* simple layout for content pages */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.section {
+  margin-bottom: 1.25rem;
+}
+nav.site-nav {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.9rem 1.5rem;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0));
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(127, 81, 49, 0.12); /* subtle copper border */
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  transition: all 160ms ease;
+  font-weight: 600;
+}
+.site-nav a:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(192, 122, 63, 0.12),
+    rgba(255, 183, 106, 0.06)
+  );
+  color: var(--text);
+  transform: translateY(-1px);
+}
+.site-nav a.active {
+  color: #0b0b0b;
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 6px 18px rgba(192, 122, 63, 0.08);
+}
+.site-nav a:hover {
+  color: var(--text);
+}
+.site-nav a.active {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+.brand-logo img {
+  height: 80px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
+  margin-right: 8px;
+}
+
+/* Support both selector styles so prebuilt/static pages still get nav styling */
+nav a,
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  transition: all 160ms ease;
+  font-weight: 600;
+}
+nav a:hover,
+.site-nav a:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(192, 122, 63, 0.12),
+    rgba(255, 183, 106, 0.06)
+  );
+  color: var(--text);
+  transform: translateY(-1px);
+}
+nav a.active,
+.site-nav a.active {
+  color: var(--accent-strong);
+}
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.75rem;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    flex-direction: column;
+  }
+  .hero-left,
+  .hero-right {
+    padding: 2rem;
+  }
+}
+
+/* Pagination UI */
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+.pagination-nav a,
+.pagination-nav span {
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  text-decoration: none;
+}
+.pagination-nav a {
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.pagination-nav a:hover {
+  background: var(--accent);
+  color: #0b0b0b;
+}
+.pagination-nav .current {
+  background: var(--accent);
+  color: #0b0b0b;
+  font-weight: 700;
+}
+.pagination-nav .disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Footer styles */
+.site-footer {
+  background: linear-gradient(180deg, var(--panel), #060708);
+  color: var(--muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 2.5rem 0 1rem 0;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.footer-col h3,
+.footer-col h4 {
+  color: var(--accent-strong);
+  margin-bottom: 0.5rem;
+}
+.footer-col p.muted,
+.footer-col .muted {
+  color: rgba(246, 245, 244, 0.75);
+}
+.footer-links,
+.social-list,
+.nav-list {
+  list-style: none;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.footer-links a,
+.social-list a,
+.nav-list a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+.footer-links li.tag {
+  color: var(--muted);
+}
+.footer-bottom {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+.small {
+  font-size: 0.85rem;
+}
+.note strong {
+  color: var(--accent-strong);
+}
+.copyright {
+  margin-top: 0.6rem;
+  color: rgba(246, 245, 244, 0.6);
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .brand-logo img {
+    height: 56px;
+  }
+}
+
+/* Social icon + hover/focus states */
+.social-list {
+  padding: 0;
+}
+.social-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: rgba(246, 245, 244, 0.9);
+  padding: 0.15rem 0.25rem;
+  border-radius: 8px;
+  transition: color 160ms ease, transform 160ms ease;
+}
+.social-link:focus {
+  outline: 2px solid rgba(255, 183, 106, 0.14);
+  box-shadow: 0 0 0 3px rgba(255, 183, 106, 0.06);
+}
+.social-link .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0.28rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--accent-strong);
+  transition: background 160ms ease, transform 160ms ease, color 160ms ease,
+    filter 160ms ease;
+}
+.social-link:hover .icon,
+.social-link:focus .icon {
+  background: linear-gradient(180deg, var(--accent), var(--accent-strong));
+  color: #0b0b0b;
+  transform: translateY(-3px) scale(1.03);
+}
+.social-link:hover,
+.social-link:focus {
+  color: var(--text);
+  transform: translateY(-2px);
+}
+.social-name {
+  font-weight: 600;
+  color: inherit;
+}
+.social-list .muted {
+  margin-left: 0.35rem;
+  color: rgba(246, 245, 244, 0.7);
+}
+
+/* Tooltip for social links (custom) */
+.social-link[data-tooltip] {
+  position: relative;
+}
+.social-link[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(6, 6, 6, 0.9);
+  color: var(--muted);
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  z-index: 30;
+}
+.social-link:hover[data-tooltip]::after,
+.social-link:focus[data-tooltip]::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0px);
+}
+
+/* Entrance animation for icons */
+@keyframes iconEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.social-link .icon {
+  animation: iconEntrance 420ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+.social-list li:nth-child(1) .icon {
+  animation-delay: 0ms;
+}
+.social-list li:nth-child(2) .icon {
+  animation-delay: 80ms;
+}
+.social-list li:nth-child(3) .icon {
+  animation-delay: 160ms;
+}
+.social-list li:nth-child(4) .icon {
+  animation-delay: 240ms;
+}
+.social-list li:nth-child(5) .icon {
+  animation-delay: 320ms;
+}
+
+/* Ensure small devices keep clickable area comfortable */
+@media (max-width: 520px) {
+  .social-link {
+    gap: 0.5rem;
+  }
+  .social-link .icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    padding: 0.2rem;
+  }
+}
+
+.fa-kick::before {
+  font-family: Arial var(--accent), sans-serif;
+  font-weight: bold;
+  content: "K";
+  font-size: 1.1em;
+}
+
+/* Article / Markdown Content Styling */
+article {
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: rgba(246, 245, 244, 0.9);
+}
+article h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  color: var(--text);
+}
+article .sub {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(127, 81, 49, 0.2);
+}
+article h2 {
+  font-size: 1.8rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  color: var(--accent-strong);
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+}
+article h3 {
+  font-size: 1.4rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+article p {
+  margin-bottom: 1.5rem;
+}
+article ul, article ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+article li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+article li::marker {
+  color: var(--accent);
+}
+article a {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s;
+}
+article a:hover {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+article blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border-left: 4px solid var(--copper);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--muted);
+}
+article pre {
+  background: #050505;
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
+article code {
+  font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  color: var(--accent-strong);
+}
+article pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.95em;
+}
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 2rem 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+article hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(127, 81, 49, 0.5), transparent);
+  margin: 4rem 0;
+}

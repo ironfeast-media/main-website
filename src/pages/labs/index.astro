@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+<BaseLayout title="Labs · Ironfeast">
+  <h2>IRONFEAST LABS</h2>
+  <p class="sub">Engineering Reliability in Complex Systems.</p>
+
+  <div class="about-body container">
+    <p>Ironfeast Labs is the research and development arm of Ironfeast.tv. We specialize in software supply chain security, declarative infrastructure, and the intersection of media production workflows with cloud-native engineering.</p>
+
+    <section class="gaming-section">
+      <div class="game">
+        <h3>🔬 CURRENT RESEARCH: PROJECT CARVEL-NIXIFY</h3>
+        <p><strong>Status:</strong> National Science Foundation (NSF) Phase I Project Pitch</p>
+        <p><strong>The Challenge:</strong> The "Last Mile" of Software Integrity — While Nix provides the gold standard for reproducible builds (bit-for-bit identical binary artifacts), and Carvel offers a modular suite for declarative Kubernetes deployments, these two powerful ecosystems are not natively compatible. This creates a gap where provenance and integrity are often lost before deployment.</p>
+        <p><strong>The Innovation:</strong> We are developing a framework to bridge this gap, enabling End-to-End Verifiable Kubernetes Deployments. By integrating Nix’s integrity guarantees into the standard Carvel GitOps workflow, we aim to solve the "last-mile" problem that currently prevents high-assurance sectors from adopting reproducible builds in production.</p>
+
+        <h4>Technical Objectives:</h4>
+        <ul>
+          <li>Trusted Builder Integration: Extending kbld to utilize Nix as a hermetic builder, eliminating sources of non-determinism in OCI container images.</li>
+          <li>Cryptographic Attestation: Generating formal in-toto attestations for every build, signed via Sigstore (cosign) to prove authenticity and unforgeability.</li>
+          <li>Deployment-Time Enforcement: Developing a wrapper for kapp that enforces strict security policies, blocking deployments if cryptographic signatures fail verification.</li>
+        </ul>
+
+        <p>This project pursues foundational research into verifiability and trust in complex software artifacts, aligning with SLSA Level 4 standards.</p>
+      </div>
+
+      <div class="game">
+        <h3>👨‍💻 OPEN SOURCE & LEADERSHIP</h3>
+        <p><strong>Principal Investigator:</strong> João Pereira — Core Engineer & Contributor, Carvel Project Team</p>
+        <p>Our research is grounded in deep architectural insight. As a confirmed engineer on the Carvel project team, the Principal Investigator brings intrinsic knowledge of the toolchain required to execute complex, cross-ecosystem integrations.</p>
+        <p><strong>Code Repositories & Contributions:</strong></p>
+        <ul>
+          <li>Active Engineering: <a href="https://github.com/joaopapereira">github.com/joaopapereira</a> — Contributions to the Carvel suite (ytt, kapp, kbld) and upstream Kubernetes tooling.</li>
+          <li>Labs Projects: <a href="https://github.com/ironfeast-media">github.com/ironfeast-media</a> — The future home of the Carvel-Nixify framework and open-source media automation tools.</li>
+        </ul>
+      </div>
+
+      <div class="game">
+        <h3>🤝 ENGINEERING SERVICES & CONTRACTING</h3>
+        <p>Ironfeast Labs offers specialized engineering contracting for organizations seeking to modernize their delivery pipelines or solve complex infrastructure challenges. We bring the same "Systemic Mastery" viewed in our simulations to your production environment.</p>
+        <p><strong>Core Competencies:</strong></p>
+        <ul>
+          <li>Kubernetes & GitOps: Design and implementation of modular deployment chains using Carvel or Helm.</li>
+          <li>Supply Chain Security: Implementation of SLSA frameworks, signing pipelines (Sigstore), and artifact verification.</li>
+          <li>Reproducible Builds: Consulting on migrating build systems to Nix for deterministic outcomes.</li>
+          <li>Workflow Automation: Leveraging AI-assisted tooling (Copilot/LLMs) to refactor legacy codebases and optimize developer velocity.</li>
+        </ul>
+
+        <p><strong>Collaboration Model:</strong> We engage in high-impact, short-to-medium-term contracts to architecture critical infrastructure or develop proof-of-concept integrations for high-assurance environments.</p>
+        <p class="cta-links">[<a href="/contact/">Contact for Contracting Inquiries</a>] | [<a href="/blog/">View Technical Blog</a>]</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

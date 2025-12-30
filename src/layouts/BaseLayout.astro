@@ -1,0 +1,79 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+const { title = 'Ironfeast' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a class="brand-logo" href="/">
+        <img src="/logo.png" alt="Ironfeast logo" onerror="this.onerror=null;this.src='/logo.svg'" />
+      </a>
+      <a href="/">Home</a>
+      <a href="/gaming/">Gaming</a>
+      <a href="/labs/">Labs</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner container">
+        <div class="footer-col col-1">
+          <h3>Ironfeast.tv</h3>
+          <p class="muted">A digital production and engineering entity focused on systemic mastery. Building Empires. Securing Code.</p>
+          <p class="copyright">© 2025 Ironfeast Media</p>
+        </div>
+        <div class="footer-col col-2">
+          <h4>Intelligence <span class="muted">(Latest Post)</span></h4>
+          <p class="section-title muted">Technical Journal</p>
+          <ul class="footer-links">
+            
+          </ul>
+        </div>
+        <div class="footer-col col-3">
+          <h4>Ecosystem <span class="muted">(Socials)</span></h4>
+          <ul class="social-list">
+            <li>
+              <a class="social-link" href="https://bsky.app/profile/ironfeast.bsky.social" aria-label="BlueSky profile: ironfeast.bsky.social" data-tooltip="BlueSky — Decentralized Social Adoption">
+                <i class="icon fa-solid fa-cloud" aria-hidden="true"></i>
+                <span class="social-name">@ironfeast.bsky.social</span>
+              </a>
+            </li>
+            <li>
+              <a class="social-link" href="https://www.youtube.com/@ironfeasttv" aria-label="YouTube channel: ironfeasttv" data-tooltip="YouTube — Archival Strategy & Guides">
+                <i class="icon fa-brands fa-youtube" aria-hidden="true"></i>
+                <span class="social-name">@ironfeasttv</span>
+              </a>
+            </li>
+            <li>
+              <a class="social-link" href="https://www.twitch.tv/ironfeast" aria-label="Twitch channel: ironfeast" data-tooltip="Twitch — Live Engineering & Gaming">
+                <i class="icon fa-brands fa-twitch" aria-hidden="true"></i>
+                <span class="social-name">ironfeast</span>
+              </a>
+            </li>
+            <li>
+              <a class="social-link" href="https://kick.com/ironfeast" aria-label="Kick channel: ironfeast" data-tooltip="Kick — Live Engineering & Gaming">
+                <i class="icon fa-kick" aria-hidden="true"></i>
+                <span class="social-name">ironfeast</span>
+              </a>
+            </li>
+            <li>
+              <a class="social-link" href="https://x.com/ironfeasttv" aria-label="X profile: ironfeasttv" data-tooltip="X — microblogging">
+                <i class="icon fa-brands fa-x-twitter" aria-hidden="true"></i>
+                <span class="social-name">ironfeasttv</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

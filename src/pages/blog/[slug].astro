@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const markdownBlogFiles = import.meta.glob('../../content/blog/*/*.md', { eager: true });
+const slug = Astro.params.slug;
+const match = Object.entries(markdownBlogFiles).find(([path]) => path.endsWith(`/${slug}.md`));
+let post = null;
+if (match) {
+  const mod = match[1];
+  post = { ...(mod.frontmatter ?? {}), Content: mod.default };
+}
+---
+
+<BaseLayout title={post ? post.title : 'Post Not Found'}>
+  {post ? (
+    <article>
+      <h1>{post.title}</h1>
+      <div class="sub">
+        {post.date} — {post.category}<br />
+        By: {post.author} @ {post.company}
+      </div>
+      <post.Content />
+    </article>
+  ) : (
+    <p>Post not found.</p>
+  )}
+</BaseLayout>
