@@ -1,27 +1,72 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const markdownBlogFiles = import.meta.glob('../../content/blog/*/*.md', { eager: true });
-const slug = Astro.params.slug;
-const match = Object.entries(markdownBlogFiles).find(([path]) => path.endsWith(`/${slug}.md`));
-let post = null;
-if (match) {
-  const mod = match[1];
-  post = { ...(mod.frontmatter ?? {}), Content: mod.default };
+// With server mode, we fetch the entry dynamically
+const { slug } = Astro.params;
+
+// Find the entry that matches this slug
+const allEntries = await getCollection('blog');
+
+const entry = allEntries.find(e => {
+  // Remove .md extension and get just the filename
+  const entrySlug = e.id.replace(/\.md$/, '').split('/').pop();
+  return entrySlug === slug;
+});
+
+if (!entry) {
+  console.error('Entry not found! Looking for:', slug);
+  console.error('Available entries:', allEntries.map(e => e.id));
+  return Astro.redirect('/404');
 }
+
+const { Content } = await entry.render();
+const { title, description, pubDate, heroImage, images } = entry.data;
 ---
 
-<BaseLayout title={post ? post.title : 'Post Not Found'}>
-  {post ? (
-    <article>
-      <h1>{post.title}</h1>
-      <div class="sub">
-        {post.date} — {post.category}<br />
-        By: {post.author} @ {post.company}
-      </div>
-      <post.Content />
-    </article>
-  ) : (
-    <p>Post not found.</p>
-  )}
+<BaseLayout title={title}>
+  <article>
+    <h1>{title}</h1>
+    <div class="sub">
+      {pubDate && pubDate.toDateString()}
+    </div>
+    
+    {heroImage && (
+      <Image src={heroImage} alt={title} width={1200} height={600} />
+    )}
+    
+    <div class="prose">
+      <Content />
+    </div>
+    
+    <div class="image-cache" style="display: none;">
+      {images && Object.entries(images).map(([key, imgSrc]) => (
+        <Image 
+          src={imgSrc} 
+          alt={key} 
+          width={1200} 
+          height={600} 
+          format="webp" 
+          quality={80}
+          data-img-key={key}
+        />
+      ))}
+    </div>
+  </article>
 </BaseLayout>
+
+<script define:vars={{ images: images || {} }}>
+  if (typeof window !== 'undefined') {
+    document.querySelectorAll('.prose img').forEach(img => {
+      const src = img.getAttribute('src') || '';
+      if (src.startsWith('img:')) {
+        const key = src.replace('img:', '');
+        const cached = document.querySelector(`[data-img-key="${key}"]`);
+        if (cached) {
+          img.replaceWith(cached.cloneNode(true));
+        }
+      }
+    });
+  }
+</script>

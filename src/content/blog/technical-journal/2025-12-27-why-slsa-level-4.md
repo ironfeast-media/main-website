@@ -11,7 +11,9 @@ summary: "Contextualizing SLSA Level 4 for Kubernetes deployments and supply cha
 author: João Pereira | Principal Investigator
 company: Ironfeast Labs
 estimated-reading-time: 12 minutes
-
+images:
+  slsa-overview: './slsa-lvl4-overview.png'
+  carvel-nix-slsa: './carvel-nix-slsa-lvl4.png'
 ---
 
 In the discipline of systems engineering, visibility is the prerequisite for security. To manage risk, one must first eliminate obscurity. Within Cloud-Native infrastructure, however, a persistent "fog of uncertainty" often plagues the build pipeline. While most organizations maintain clear records of their source code and its eventual deployment target, a critical gap remains: the ability to prove, with cryptographic certainty, that the binary active in a production container is bit-for-bit identical to the verified source code.
@@ -32,7 +34,7 @@ Level 4 is the "Systemic Mastery" of software engineering. To achieve this, you 
 1. Two-Person Review: No single developer can push code that ends up in an artifact without oversight.
 2. Hermetic Builds: The build process must run in an isolated environment with no network access (after fetching dependencies). It cannot access "random" files from the internet or the host machine.
 3. Reproducibility: If I run the build today, and you run the build next year on a different machine, we must get the exact same binary hash.
-![SLSA Level 4](./slsa-lvl4-overview.png)
+![SLSA Level 4](img:slsa-overview)
 
 --------------------------------------------------------------------------------
 ## The Cost of Failure: Why "Trust Me, Bro" No Longer Works
@@ -68,7 +70,7 @@ This is where the Carvel suite shines. We are developing a wrapper for kapp (Car
 3. Before kapp allows the deployment to the Kubernetes cluster, it checks the signature.
 4. If the signature is missing or invalid, the deployment is blocked.
 
-![Cavel with Nix to archive SLSA Level 4 artifacts](./carvel-nix-slsa-lvl4.png)
+![Cavel with Nix to archive SLSA Level 4 artifacts](img:carvel-nix-slsa)
 
 # Conclusion
 Achieving SLSA Level 4 is not just about checking a compliance box for the NSF or a defense contractor. It is about Systemic Mastery. It is about ensuring that the digital empires we build—whether they are game servers or critical financial infrastructure—are built on bedrock, not sand.
