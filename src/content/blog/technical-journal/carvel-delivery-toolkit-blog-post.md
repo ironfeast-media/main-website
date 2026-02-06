@@ -51,7 +51,7 @@ The Kubernetes ecosystem responded with partial solutions. Helm tackled templati
 
 What the Carvel project got right—first at VMware, now under CNCF stewardship—was rejecting the "one tool to rule them all" approach. Instead, each tool was designed to do one thing exceptionally well, with clean interfaces between them. This is why Carvel feels different—it's not trying to be your entire delivery platform. It's giving you the right primitives.
 
-![Diagram of workflow for Carvel tools]{img:carvel-workflow-diagram}
+![Diagram of workflow for Carvel tools](img:carvel-workflow-diagram)
 
 ### ytt: Configuration as Code, Not Templates
 
@@ -133,7 +133,7 @@ imgpkg copy --tar /tmp/postgres-bundle.tar \
 
 The entire dependency tree—images, configs, operators—relocates atomically with integrity preserved. This isn't theoretical; this is how thousands of Tanzu installations happen in regulated industries where internet access is a fantasy.
 
-![imgpkg Relocation Process Diagram]{img:imgpkg-airgap-relocation}
+![imgpkg Relocation Process Diagram](img:imgpkg-airgap-relocation)
 
 ### kbld: Image Immutability and Lock Files
 
