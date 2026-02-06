@@ -1,6 +1,6 @@
 ---
 title: "The Carvel Delivery Toolkit: Why This CNCF Project Deserves More Attention"
-date: "2025-02-05"
+date: "2026-02-05"
 category: "Platform Engineering"
 type: technical-journal
 tags:
